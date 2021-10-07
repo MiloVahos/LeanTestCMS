@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../../config/db')
-const User = require('../../users/models/UserModel')
 
 const Task = sequelize.define('Task', {
   id: {
@@ -25,8 +24,5 @@ const Task = sequelize.define('Task', {
   tableName: 'tasks',
   timestamps: false
 });
-
-Task.belongsTo(User, { foreignKey: 'user_id', as: 'task' })
-User.hasMany(Task, { foreignKey: 'user_id' })
 
 module.exports = Task
