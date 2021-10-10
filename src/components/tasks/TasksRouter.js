@@ -1,9 +1,10 @@
 const { Router } = require('express')
-const { postTask, getTaskById, putTaskById, deleteTaskById } = require('../tasks/controllers/TaskController')
+const { postTask, getTaskById, putTaskById, deleteTaskById, getTasksListByUserId } = require('../tasks/controllers/TaskController')
 const { validateSchemaBody, validateSchemaParams } = require('../../utils/Validators')
 const { catchErrors } = require('../../utils/ErrorHandler')
 const createTaskSchema = require('./schemas/createTaskSchema')
 const idSchema = require('./schemas/idSchema')
+const userIdSchema = require('./schemas/userIdSchema')
 const updateTaskSchema = require('./schemas/updateTaskSchema')
 const { validateUserRole } = require('../../utils/Authorization')
 
@@ -21,6 +22,13 @@ router.get(
   validateUserRole(['ADMIN', 'USER']),
   validateSchemaParams(idSchema),
   catchErrors(getTaskById)
+)
+
+router.get(
+  '/list/:userId',
+  validateUserRole(['ADMIN', 'USER']),
+  validateSchemaParams(userIdSchema),
+  catchErrors(getTasksListByUserId)
 )
 
 router.put(

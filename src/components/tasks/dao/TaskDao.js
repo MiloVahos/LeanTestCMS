@@ -1,7 +1,6 @@
 const Task = require('../models/TaskModel')
 
 const saveTask = async (task) => {
-  console.log(task)
   const taskModel = await Task.create(task)
   return await taskModel.get({ plain: true })
 }
@@ -10,6 +9,11 @@ const getTaskById = async (id) => {
   const taskModel = await Task.findOne({ where: { id }})
   if (!taskModel) return null
   return await taskModel.get({ plain: true })
+}
+
+const getTasksByUserId = async (userId) => {
+  const tasks = await Task.findAll({ where: { user_id: userId }, raw: true })
+  return tasks
 }
 
 const updateTaskById = async (id, updateTaskData) => {
@@ -26,4 +30,4 @@ const deleteTaskById = async (id) => {
   return true
 }
 
-module.exports = { saveTask, getTaskById, updateTaskById, deleteTaskById }
+module.exports = { saveTask, getTaskById, updateTaskById, deleteTaskById, getTasksByUserId }

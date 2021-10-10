@@ -1,0 +1,5 @@
+const USER_ROLES_LIST = ['ADMIN', 'USER']
+const ADMIN_ROLE = 'ADMIN'
+const USER_ROLE = 'USER'
+
+module.exports = { USER_ROLES_LIST, ADMIN_ROLE, USER_ROLE }
