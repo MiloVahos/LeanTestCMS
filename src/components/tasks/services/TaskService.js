@@ -1,6 +1,7 @@
 const { saveTask, getTaskById, updateTaskById, deleteTaskById, getTasksByUserId } = require('../dao/TaskDao')
 const boom = require('@hapi/boom')
-const { USER_ROLE } = require('../../../utils/constants')
+const { USER_ROLE, ADMIN_ROLE } = require('../../../utils/constants')
+const { sendEmail } = require('../../../utils/mailer')
 
 const createTask = async (user, task) => {
   if (task.user_id && user.role === USER_ROLE && task.user_id !== user.id) {
@@ -10,6 +11,7 @@ const createTask = async (user, task) => {
     task.user_id = user.id
   }
   // Falta validar que el usuario con id exista
+  await sendEmail('jpena@lean-tech.io', `Task - ${task.name} - created for you`)
   const newTask = await saveTask(task)
   return newTask
 }
