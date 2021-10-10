@@ -1,6 +1,6 @@
 const axios = require('axios')
 const boom = require('@hapi/boom')
-const sign = require('jwt-encode')
+const jwt = require('jsonwebtoken')
 
 const getAuth0Token = async () => {
   const data = {
@@ -23,7 +23,7 @@ const authUserByEmailAndPasssword = async (userData) => {
   const isUserValid = await validateUser(email, password, auth0Token)
   if (isUserValid.auth) {
     const user = isUserValid.user
-    const accessToken = sign(user, process.env.JWT_SECRET);
+    const accessToken = jwt.sign(user, process.env.JWT_SECRET)
     return { accessToken }
   } else {
     throw boom.unauthorized()
