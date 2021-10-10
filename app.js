@@ -1,4 +1,4 @@
-const http = require('http')
+const https = require('https')
 const express = require('express')
 const app = express()
 const helment = require('helmet')
@@ -19,7 +19,7 @@ app.use(notFoundHandler)
 app.use(wrapErrors)
 app.use(errorHandler)
 
-const server = http.createServer(app)
+const server = https.createServer(app)
 sequelize.authenticate().then(() => {
   console.log('Connection to the database has been established successfully');
   server.listen(process.env.PORT || 3000, () => {
