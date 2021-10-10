@@ -22,6 +22,7 @@ const tokenValidator = () => {
       const token = req.headers.authorization.split(' ')[1]
       try {
         const verifiedToken = jwt.verify(token, process.env.JWT_SECRET)
+        res.locals = { ...verifiedToken }
         next()
       } catch (e) {
         res.status(boom.unauthorized().output.statusCode).json({ message: 'Unauthorized' })

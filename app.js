@@ -6,6 +6,9 @@ const compression = require('compression')
 const mainRouter = require('./src/components/MainRouter')
 const sequelize = require('./src/config/db')
 const { notFoundHandler, errorHandler, wrapErrors } = require('./src/utils/ErrorHandler')
+const conectarDB = require('./src/config/mongoDB')
+
+conectarDB()
 
 app.use(helment())
 app.use(compression())
