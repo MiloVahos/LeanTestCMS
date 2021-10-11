@@ -8,8 +8,10 @@ const mainRouter = require('./src/components/MainRouter')
 const sequelize = require('./src/config/db')
 const { notFoundHandler, errorHandler, wrapErrors } = require('./src/utils/ErrorHandler')
 const conectarDB = require('./src/config/mongoDB')
+const cron = require('./src/utils/CronTask')
 
 conectarDB()
+cron.start()
 
 app.use(helment())
 app.use(compression())
