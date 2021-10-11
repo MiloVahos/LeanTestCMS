@@ -20,12 +20,12 @@ app.use(notFoundHandler)
 app.use(wrapErrors)
 app.use(errorHandler)
 
-const options = {
+const serverOptions = {
   key: fs.readFileSync('key.pem'),
   cert: fs.readFileSync('cert.pem')
 };
 
-const server = https.createServer(options, app)
+const server = https.createServer(serverOptions, app)
 sequelize.authenticate().then(() => {
   console.log('Connection to the database has been established successfully');
   server.listen(process.env.PORT || 3000, () => {
