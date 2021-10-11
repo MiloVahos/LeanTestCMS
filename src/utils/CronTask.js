@@ -3,10 +3,10 @@ const axios = require('axios')
 const Client = require('ssh2-sftp-client')
 
 const sshConfig = {
-  host: 't-insight.exavault.com',
+  host: '',
   port: 22,
-  username: 'NTG_LeanTech',
-  password: 'CI5FKYggnBANUnG',
+  username: '',
+  password: '',
 };
 
 const task = cron.schedule(process.env.CRON_EXPRESSION, async () => {
